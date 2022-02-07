@@ -35,3 +35,7 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+.cache.db
+public/atom.xml
+public/rss.xml
