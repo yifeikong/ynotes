@@ -39,3 +39,4 @@ yarn-error.log*
 .cache.db
 public/atom.xml
 public/rss.xml
+src/*.js
