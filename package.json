@@ -7,7 +7,8 @@
     "build": "next build",
     "postbuild": "echo postbuild",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "publish": "vercel --prod"
   },
   "dependencies": {
     "@types/marked": "^4.0.1",

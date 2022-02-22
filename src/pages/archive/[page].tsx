@@ -24,7 +24,7 @@ const Archive = ({posts, pageCount}: ArchiveProps) => {
   const currentPageNum = parseInt(page as string)
   const timeFormat = "YYYY-MM-DD HH:mm"
   return (<>
-    <Layout>
+    <Layout title={`Archive - ${page} - Yifei's Notes`}>
     <h2 className="text-2xl text-semibold my-4">Archives - Page {currentPageNum}</h2>
     <ol className="list-disc ml-4">
     {posts.map(post => (

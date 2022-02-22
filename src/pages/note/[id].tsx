@@ -15,8 +15,8 @@ import {renderer} from '../../utils'
 const PostPage = ({id, title, content, published, modified}: Post) => {
   const timeFormat = "YYYY-MM-DD HH:mm"
   return (
-    <Layout>
-      <div className="my-4 border -mx-2 p-4 shadow">
+    <Layout title={`${title} - Yifei's Notes`}>
+      <div className="my-4 border -mx-2 p-4 lg:p-8 shadow">
         <h1 className="text-2xl my-4 font-semibold">{title}</h1>
         <div className="text-gray-400 my-4 border-y py-2">
           <p className="mr-4">Posted on:

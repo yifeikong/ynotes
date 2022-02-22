@@ -11,7 +11,7 @@ import hljs from 'highlight.js'
 const AboutPage: NextPage = () => {
   const timeFormat = "YYYY-MM-DD HH:mm"
   return (
-    <Layout>
+    <Layout title="About Yifei's Notes">
       <div className="my-4 border -mx-2 p-4 shadow">
         <h1 className="text-2xl my-4 font-semibold">About</h1>
         <div className="space-y-4 my-4">

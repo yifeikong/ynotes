@@ -19,9 +19,9 @@ interface Props {
 const Home = ({posts}: Props) => {
   const timeFormat = "YYYY-MM-DD HH:mm"
   return (<>
-    <Layout>
+    <Layout title="Yifei's Notes">
     {posts.map(post => (
-      <div className="border my-2 p-2 rounded" key={post.id}>
+      <div className="border my-2 p-2 lg:p-4 rounded" key={post.id}>
         <h2 className="text-xl"><Link href={`/note/${post.id}`} passHref>
           <a>{post.title}</a>
         </Link></h2>
