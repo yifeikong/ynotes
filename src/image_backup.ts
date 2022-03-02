@@ -42,18 +42,17 @@ const visit = async (filepath: string) => {
 
 const downloadSina = async () => {
   const files = await glob("../notes/**/*.md")
-  let posts = []
   for (const file of files) {
     const fileContent = await fs.readFile(file, "utf-8")
     const lines = fileContent.split("\n")
-    for (const [idx, line] of lines.entries()) {
+    for (const [_, line] of lines.entries()) {
       // https://ws1.sinaimg.cn/large/006tNc79gy1fmjv6ugbr4j31jw0mo4qp.jpg
-      const m = line.match(/https:\/\/\w+\.sinaimg\.cn\/large\/[\w\.]+/)
+      const m = line.match(/https?:\/\/\w+\.sinaimg\.cn\/large\/([\w\.]+)/)
       if (m) {
-        const url = m[0]
+        const url = m[0].replace(/ws\d/, "tva1")
+        console.log(`downloading ${url}`)
         const imageRes = await axios.get(url, {responseType: "arraybuffer"})
-        
-
+        await fs.writeFile(`sinaimg/${m[1]}`, imageRes.data)
       }
     }
   }
