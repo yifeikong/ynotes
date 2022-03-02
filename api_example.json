@@ -1,0 +1,17 @@
+{
+  "Guid": "85f9b57c-6e5b-4c14-903c-6a73e5c36022",
+  "StorageZoneName": "onefly",
+  "Path": "/onefly/notes/",
+  "ObjectName": "2022",
+  "Length": 0,
+  "LastChanged": "2022-01-31T05:39:36.563",
+  "ServerId": 0,
+  "ArrayNumber": 0,
+  "IsDirectory": true,
+  "UserId": "70cf0b9d-5f3f-42d6-a62b-840d4ca4192b",
+  "ContentType": "",
+  "DateCreated": "2022-01-31T05:39:36.563",
+  "StorageZoneId": 111111,
+  "Checksum": null,
+  "ReplicatedZones": null
+}
