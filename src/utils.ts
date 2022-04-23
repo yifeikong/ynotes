@@ -34,5 +34,8 @@ export const renderer = {
   },
   listitem(text: string, task: boolean, checked: boolean) {
     return `<li class="">${text}</li>`
-  }
+  },
+  codespan(text: string) {
+    return `<code class="px-1 bg-gray-100 border-2 rounded">${text}</code>`
+  },
 }
