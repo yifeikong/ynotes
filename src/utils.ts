@@ -38,4 +38,7 @@ export const renderer = {
   codespan(text: string) {
     return `<code class="px-1 bg-gray-100 border-2 rounded">${text}</code>`
   },
+  link(href: string, title: string, text: string) {
+    return `<a class="underline" href="${href}" title="${title}">${text}</a>`
+  },
 }
