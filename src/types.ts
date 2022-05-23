@@ -5,3 +5,7 @@ export interface Post {
   modified: number
   content?: string
 }
+
+export interface Series {
+  id: number
+}

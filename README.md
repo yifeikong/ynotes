@@ -26,4 +26,5 @@ This is my first post.
 
 ## TODO
 
-- support RSS and ATOM. https://yifei.me/feed https://yifei.me/feed/atom
+- [x] Support RSS and ATOM. https://yifei.me/feed https://yifei.me/feed/atom
+- [ ] Support series of articles.
