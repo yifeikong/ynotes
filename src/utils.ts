@@ -47,5 +47,8 @@ export const renderer = {
     } else {
       return `<td class="border border-solid px-2 py-1 ">${content}</td>`
     }
+  },
+  blockquote(quote: string) {
+    return `<blockquote class="pl-4 pr-0 py-2 bg-gray-100 border-l-8">${quote}</blockquote>`
   }
 }
