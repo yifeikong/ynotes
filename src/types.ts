@@ -6,6 +6,9 @@ export interface Post {
   content?: string
 }
 
-export interface Series {
+export interface List {
   id: number
+  slug: string
+  title: string
+  notes: string
 }

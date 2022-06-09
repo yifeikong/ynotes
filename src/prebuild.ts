@@ -7,6 +7,8 @@ import crypto from 'crypto'
 import {Feed} from 'feed'
 import {renderer} from './utils'
 import {marked} from 'marked'
+import yaml from 'js-yaml'
+import path from 'path'
 
 
 type PostStatus = "publish" | "draft"
@@ -30,6 +32,11 @@ interface StatusRecord {
   contentHash: string
 }
 
+interface PostList {
+  title: string
+  notes: Post[]
+}
+
 const readPosts = async () => {
   // @ts-ignore
   const files = await glob("../notes/**/*.md")
@@ -39,7 +46,8 @@ const readPosts = async () => {
     // console.log(file)
     const fileContent = await fs.readFile(file, "utf-8")
     // console.log(fileContent.slice(0, 10))
-    let post: Post = {title: "", status: "draft", wp_id: 0, content: "", path: file, isModified: false}
+    const path = file.replace("../notes/", "")
+    let post: Post = {title: "", status: "draft", wp_id: 0, content: "", path, isModified: false}
     let startIdx = 0
     let outOfMeta = false
     const lines = fileContent.split("\n")
@@ -81,7 +89,7 @@ const readPosts = async () => {
       startIdx = idx
       break
     }
-    console.log(post)
+    console.log(`inserting ${post.title}, ${post.wp_id}`)
     post.content = lines.slice(startIdx, lines.length).join("\n")
     post.contentHash = crypto.createHash("md5").update(post.content).digest("hex")
     if (post.wp_id !== 0) {
@@ -162,7 +170,7 @@ const writeBackPosts = async (posts: Post[]) => {
       post.content,
     ].join("\n")
 
-    await fs.writeFile(post.path, fileContent)
+    await fs.writeFile(`../notes/${post.path}`, fileContent)
   }
 }
 
@@ -194,7 +202,7 @@ const fillMetadataInplace = async (posts: Post[]) => {
     if (post.status === "draft") {
       post.published === undefined
     }
-    const stat = await fs.stat(post.path)
+    const stat = await fs.stat(`../notes/${post.path}`)
     if (!post.created) {
       post.created = stat.birthtimeMs
     }
@@ -293,6 +301,36 @@ const buildFeed = async () => {
   await fs.writeFile("public/atom.xml", feed.atom1())
 }
 
+const buildLists = async () => {
+  const files = await glob("../notes/_list/*.yaml")
+  let posts = []
+  const db = await open({ filename: ".cache.db", driver: sqlite3.Database })
+  await db.exec(
+    `create table lists(
+      id integer primary key autoincrement,
+      slug text,
+      title text,
+      notes text
+    )`
+  )
+  for (const file of files) {
+    const fileContent = await fs.readFile(file, "utf-8")
+    const list = yaml.load(fileContent)
+    const slug = path.basename(file, ".yaml")
+    try {
+      await db.run(
+        `insert into lists
+        (slug, title, notes)
+        values(?, ?, ?)`,
+        // @ts-ignore
+        [slug, list.title, JSON.stringify(list.notes) ]
+      )
+    } catch (e) {
+      console.error(`failed to insert list: ${slug}`, e)
+    }
+  }
+}
+
 
 const prebuild = async () => {
   const posts = await readPosts()
@@ -302,6 +340,7 @@ const prebuild = async () => {
   await writeBackPosts(posts)
   await updateStatusesFile(posts)
   await buildFeed()
+  await buildLists()
 }
 
 prebuild()

@@ -1,8 +1,10 @@
 # Ynotes
 
-Ynotes is a very simple static site genrateor with next.js. It is used to generate my [weblog](https://yifei.me)
+Ynotes is a very simple static site generator with next.js. It is used to generate my
+[weblog](https://yifei.me)
 
-Ynotes read in markdown files and converts them into html files. The markdown files should contain metadata inside comments, the format is:
+Ynotes read in markdown files and converts them into html files. The markdown files should
+contain metadata inside comments, the format is:
 
 ```markdown
 # Hello world
@@ -23,7 +25,7 @@ This is my first post.
 - Date: time created, `%Y-%m-%dT%H:%M:%S`
 - Modified: time modified, same format
 - Published: time published
-- wp_id: deprecated
+- ~~wp_id: deprecated~~
 
 Content should start after an empty line.
 
@@ -38,3 +40,4 @@ Content should start after an empty line.
 
 - [x] Support RSS and ATOM. https://yifei.me/feed, https://yifei.me/feed/atom
 - [ ] Support series of articles.
+- [ ] Add ToC on the side.
